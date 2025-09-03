@@ -1,4 +1,4 @@
-package mona.mohamed.demo12
+package mona.mohamed.recipeapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

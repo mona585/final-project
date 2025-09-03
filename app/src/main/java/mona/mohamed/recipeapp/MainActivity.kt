@@ -1,4 +1,4 @@
-package mona.mohamed.demo12
+package mona.mohamed.recipeapp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
