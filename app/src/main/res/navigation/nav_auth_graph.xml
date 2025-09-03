@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="mona.mohamed.recipeapp.splash.SplashFragment"
+        android:name="mona.mohamed.recipeapp.view.splash.SplashFragment"
         android:label="Splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="mona.mohamed.recipeapp.auth.LoginFragment"
+        android:name="mona.mohamed.recipeapp.view.auth.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login">
         <action
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="mona.mohamed.recipeapp.auth.RegisterFragment"
+        android:name="mona.mohamed.recipeapp.view.auth.RegisterFragment"
         android:label="Register"
         tools:layout="@layout/fragment_register">
         <action
