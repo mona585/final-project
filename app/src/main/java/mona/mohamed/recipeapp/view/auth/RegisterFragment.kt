@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.databinding.FragmentRegisterBinding
 import mona.mohamed.recipeapp.R
 import mona.mohamed.recipeapp.model.AuthRepositoryImp
@@ -58,18 +60,20 @@ class RegisterFragment : Fragment() {
                     binding.passwordRegisterEditText.error = "Password must be at least 6 characters"
                 }
                 else -> {
-                    val fullName = "$firstName $lastName"
-                    val result = viewModel.register(email, password)
-                    if (result) {
-                        viewModel.setUserName(fullName)
-                        val sent = viewModel.sendVerification()
-                        if (sent) {
-                            findNavController().navigate(R.id.verificationFragment)
+                    lifecycleScope.launch {
+                        val fullName = "$firstName $lastName"
+                        val result = viewModel.register(email, password)
+                        if (result) {
+                            viewModel.setUserName(fullName)
+                            val sent = viewModel.sendVerification()
+                            if (sent) {
+                                findNavController().navigate(R.id.verificationFragment)
+                            } else {
+                                Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+                            }
                         } else {
-                            Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                         }
-                    } else {
-                        Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                     }
                 }
             }

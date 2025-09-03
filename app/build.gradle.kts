@@ -9,7 +9,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "mona.mohamed.recipeapp"
+        applicationId = "mona.mohamed.demo12"
         minSdk = 25
         targetSdk = 36
         versionCode = 1

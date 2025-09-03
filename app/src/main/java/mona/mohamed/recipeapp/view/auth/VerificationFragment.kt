@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.R
-import mona.mohamed.recipeapp.databinding.FragmentRegisterBinding
 import mona.mohamed.recipeapp.databinding.FragmentVerificationBinding
 import mona.mohamed.recipeapp.model.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
@@ -47,11 +48,13 @@ class VerificationFragment : Fragment() {
         }
 
         binding.btnResendEmail.setOnClickListener {
-            val result = viewModel.sendVerification()
-            if (result) {
-                Toast.makeText(requireContext(), "Email has been sent.", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                val result = viewModel.sendVerification()
+                if (result) {
+                    Toast.makeText(requireContext(), "Email has been sent.", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

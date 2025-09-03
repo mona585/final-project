@@ -1,6 +1,5 @@
 package mona.mohamed.recipeapp.view.auth
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -9,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.databinding.FragmentLoginBinding
 import mona.mohamed.recipeapp.R
 import mona.mohamed.recipeapp.model.AuthRepositoryImp
@@ -52,16 +53,18 @@ class LoginFragment : Fragment() {
                     binding.passwordEditText.error = "Password must be at least 6 characters"
                 }
                 else -> {
-                    val result = viewModel.login(email, password)
-                    if (result) {
-                        val verified = viewModel.isVerified()
-                        if (verified) {
-                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    lifecycleScope.launch {
+                        val result = viewModel.login(email, password)
+                        if (result) {
+                            val verified = viewModel.isVerified()
+                            if (verified) {
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            } else {
+                                findNavController().navigate(R.id.verificationFragment)
+                            }
                         } else {
-                            findNavController().navigate(R.id.verificationFragment)
+                            Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                         }
-                    } else {
-                        Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                     }
                 }
             }
