@@ -27,10 +27,18 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.registerButton.setOnClickListener {
+            val firstName = binding.firstNameEditText.text.toString().trim()
+            val lastName = binding.lastNameEditText.text.toString().trim()
             val email = binding.emailRegisterEditText.text.toString().trim()
             val password = binding.passwordRegisterEditText.text.toString().trim()
 
             when {
+                firstName.isEmpty() -> {
+                    binding.firstNameEditText.error = "First name required"
+                }
+                lastName.isEmpty() -> {
+                    binding.lastNameEditText.error = "Last name required"
+                }
                 email.isEmpty() -> {
                     binding.emailRegisterEditText.error = "Email required"
                 }
@@ -44,12 +52,24 @@ class RegisterFragment : Fragment() {
                     binding.passwordRegisterEditText.error = "Password must be at least 6 characters"
                 }
                 else -> {
-                    requireContext().getSharedPreferences("prefs", android.content.Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("isLoggedIn", true)
-                        .apply()
+                    binding.progressBar.visibility = View.VISIBLE
 
-                    findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                    // ⚡ مكان الـ Firebase أو API request
+                    binding.progressBar.postDelayed({
+                        // Hide loading
+                        binding.progressBar.visibility = View.GONE
+
+                        // Save state locally (for now)
+                        requireContext().getSharedPreferences("prefs", android.content.Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("isLoggedIn", true)
+                            .apply()
+
+                        Toast.makeText(requireContext(), "Verification successful. Please login.", Toast.LENGTH_LONG).show()
+
+                        // Navigate to login screen
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                    }, 2000) // simulate delay 2 sec
                 }
             }
         }
