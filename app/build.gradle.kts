@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "mona.mohamed.demo12"
+    namespace = "mona.mohamed.recipeapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "mona.mohamed.demo12"
+        applicationId = "mona.mohamed.recipeapp"
         minSdk = 25
         targetSdk = 36
         versionCode = 1
@@ -26,6 +26,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures {
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -48,4 +51,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation("com.google.android.material:material:1.9.0")
+
 }
