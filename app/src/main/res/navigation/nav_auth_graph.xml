@@ -61,4 +61,10 @@
             app:popUpToInclusive="true"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="mona.mohamed.recipeapp.view.auth.VerificationFragment"
+        android:label="VerificationFragment"
+        tools:layout="@layout/fragment_verification"/>
+
 </navigation>

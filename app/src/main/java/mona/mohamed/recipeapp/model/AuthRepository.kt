@@ -17,6 +17,10 @@ interface AuthRepository {
 
     suspend fun getCurrentUserId(user: FirebaseUser): String?
 
+    suspend fun isEmailVerified(user: FirebaseUser): Boolean
+
+    suspend fun sendEmailVerification(user: FirebaseUser): Boolean
+
     suspend fun setLoggedIn(isLoggedIn: Boolean)
 
     suspend fun isLoggedIn(): Boolean

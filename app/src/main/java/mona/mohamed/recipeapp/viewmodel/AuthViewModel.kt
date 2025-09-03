@@ -21,24 +21,33 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
         var result = false
         viewModelScope.launch {
             result = authRepository.isLoggedIn()
-//            if () {
-//                // There's a user logged in already [navigate to homeFragment]
-//            } else {
-//                // No user is logged in at the moment [navigate to loginFragment]
-//            }
         }
         return result
     }
 
-    fun register(name: String, email: String, password: String): Boolean {
+    fun isVerified(): Boolean {
+        var result = false
+        viewModelScope.launch {
+            val user = authRepository.getCurrentUser()
+            result = authRepository.isEmailVerified(user!!)
+        }
+        return result
+    }
+
+    fun sendVerification(): Boolean {
+        var result = false
+        viewModelScope.launch {
+            val user = authRepository.getCurrentUser()
+            result = authRepository.sendEmailVerification(user!!)
+        }
+        return result
+    }
+
+    fun register(email: String, password: String): Boolean {
         var result = false
         viewModelScope.launch {
             result = authRepository.signUp(email, password)
-//            if (result) {
-//                // *STILL UNDER DEVELOPMENT* send validation link to user email and [Navigate to validationFragment]
-//            } else {
-//                // Registration problem [Show error message]
-//            }
+            authRepository.setLoggedIn(result)
         }
         return result
     }
@@ -47,12 +56,7 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
         var result = false
         viewModelScope.launch{
             result = authRepository.signIn(email, password)
-//            if (result) {
-//                authRepository.setLoggedIn(true)
-//                // Login successful [Navigate to homeFragment]
-//            } else {
-//                // Login failed [Show error message]
-//            }
+            authRepository.setLoggedIn(result)
         }
         return result
     }

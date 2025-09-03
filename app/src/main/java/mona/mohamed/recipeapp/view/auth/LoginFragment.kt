@@ -8,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import mona.mohamed.recipeapp.databinding.FragmentLoginBinding
 import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.viewmodel.AuthViewModel
+import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 
 class LoginFragment : Fragment() {
-
+    private val viewModel: AuthViewModel by activityViewModels {
+        AuthViewModelFactory(AuthRepositoryImp(requireContext()))
+    }
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -46,12 +52,17 @@ class LoginFragment : Fragment() {
                     binding.passwordEditText.error = "Password must be at least 6 characters"
                 }
                 else -> {
-                    requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("isLoggedIn", true)
-                        .apply()
-
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    val result = viewModel.login(email, password)
+                    if (result) {
+                        val verified = viewModel.isVerified()
+                        if (verified) {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        } else {
+                            findNavController().navigate(R.id.verificationFragment)
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }

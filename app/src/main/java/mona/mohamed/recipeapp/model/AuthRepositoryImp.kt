@@ -48,6 +48,19 @@ class AuthRepositoryImp(private val context: Context): AuthRepository {
         return user.uid
     }
 
+    override suspend fun isEmailVerified(user: FirebaseUser): Boolean {
+        return user.isEmailVerified
+    }
+
+    override suspend fun sendEmailVerification(user: FirebaseUser): Boolean {
+        var result = false
+        user.sendEmailVerification()
+            .addOnCompleteListener { task ->
+                result = task.isSuccessful
+            }
+        return result
+    }
+
     override suspend fun setLoggedIn(isLoggedIn: Boolean) {
         prefs.edit { putBoolean("is_logged_in", isLoggedIn) }
     }
