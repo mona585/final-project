@@ -53,23 +53,9 @@ class RegisterFragment : Fragment() {
                 }
                 else -> {
                     binding.progressBar.visibility = View.VISIBLE
-
-                    // ⚡ مكان الـ Firebase أو API request
-                    binding.progressBar.postDelayed({
-                        // Hide loading
-                        binding.progressBar.visibility = View.GONE
-
-                        // Save state locally (for now)
-                        requireContext().getSharedPreferences("prefs", android.content.Context.MODE_PRIVATE)
-                            .edit()
-                            .putBoolean("isLoggedIn", true)
-                            .apply()
-
-                        Toast.makeText(requireContext(), "Verification successful. Please login.", Toast.LENGTH_LONG).show()
-
-                        // Navigate to login screen
-                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                    }, 2000) // simulate delay 2 sec
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Verification successful. Please login.", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 }
             }
         }
