@@ -35,7 +35,7 @@ class VerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textCheckVerified.text = "Please check your email for verification link"
+        binding.verifyMessageTextView.text = "Please check your email for verification link"
 
         binding.btnCheckVerified.setOnClickListener {
             lifecycleScope.launch {
@@ -54,7 +54,7 @@ class VerificationFragment : Fragment() {
                 if (viewModel.sendVerification()) {
                     Toast.makeText(requireContext(), "Email has been sent.", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                 }
             }
         }

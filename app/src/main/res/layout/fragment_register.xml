@@ -5,19 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Background Image -->
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/register_background"
+        android:src="@drawable/login_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Form container -->
     <LinearLayout
         android:id="@+id/registerForm"
         android:layout_width="0dp"
@@ -30,57 +28,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- First Name -->
         <EditText
             android:id="@+id/firstNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="First Name"
             android:inputType="textPersonName"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-        <!-- Last Name -->
+
         <EditText
             android:id="@+id/lastNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="Last Name"
             android:inputType="textPersonName"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-        <!-- Email input -->
+
         <EditText
             android:id="@+id/emailRegisterEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-        <!-- Password input -->
+
         <EditText
             android:id="@+id/passwordRegisterEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-        <!-- Register Button -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:text="Register"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             app:backgroundTint="#C56260"
             app:cornerRadius="24dp" />
 
-        <!-- ProgressBar (hidden by default) -->
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"

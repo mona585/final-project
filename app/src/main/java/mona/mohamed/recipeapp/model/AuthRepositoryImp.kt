@@ -1,9 +1,12 @@
 package mona.mohamed.recipeapp.model
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.userProfileChangeRequest
 import androidx.core.content.edit
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
 
@@ -58,6 +61,9 @@ class AuthRepositoryImp(private val context: Context): AuthRepository {
             user.sendEmailVerification().await()
             true
         } catch (e: Exception) {
+            if (e is FirebaseTooManyRequestsException) {
+                Toast.makeText(context, "There's a recent email been sent", Toast.LENGTH_LONG).show()
+            }
             false
         }
     }
