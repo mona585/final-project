@@ -54,8 +54,15 @@ class RegisterFragment : Fragment() {
                 else -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Verification successful. Please login.", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+
+                    Toast.makeText(
+                        requireContext(),
+                        "Verification link sent. Please check your email.",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+
+                    findNavController().navigate(R.id.action_registerFragment_to_verifyFragment)
                 }
             }
         }
