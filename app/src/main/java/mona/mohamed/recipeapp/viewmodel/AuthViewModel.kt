@@ -6,16 +6,20 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
-    fun updateIsLoggedIn() {
-        val user = authRepository.getCurrentUser()
-        if (user != null) {
-            authRepository.setLoggedIn(true)
-        } else {
-            authRepository.setLoggedIn(false)
-        }
-    }
+//    fun updateIsLoggedIn() {
+//        val user = authRepository.getCurrentUser()
+//        if (user != null) {
+//            authRepository.setLoggedIn(true)
+//        } else {
+//            authRepository.setLoggedIn(false)
+//        }
+//    }
 
     fun isUserLoggedIn() = authRepository.isLoggedIn()
+
+    fun setStatus(status: Boolean) {
+        authRepository.setLoggedIn(status)
+    }
 
     suspend fun isVerified(): Boolean {
         val user = authRepository.getCurrentUser()
@@ -28,22 +32,11 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
         return authRepository.sendEmailVerification(user!!)
     }
 
-    suspend fun register(email: String, password: String): Boolean {
-        val result = authRepository.signUp(email, password)
-        authRepository.setLoggedIn(result)
-        return result
-    }
+    suspend fun register(email: String, password: String) = authRepository.signUp(email, password)
 
-    suspend fun login(email: String, password: String): Boolean {
-        val result = authRepository.signIn(email, password)
-        authRepository.setLoggedIn(result)
-        return result
-    }
+    suspend fun login(email: String, password: String) = authRepository.signIn(email, password)
 
-    fun logout() {
-        authRepository.signOut()
-        authRepository.setLoggedIn(false)
-    }
+    fun logout() = authRepository.signOut()
 
     fun setUserName(name: String) {
         viewModelScope.launch {

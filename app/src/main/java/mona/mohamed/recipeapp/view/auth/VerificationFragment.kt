@@ -41,6 +41,7 @@ class VerificationFragment : Fragment() {
             lifecycleScope.launch {
                 if (viewModel.isVerified()) {
                     Toast.makeText(requireContext(), "Verification successful. Welcome!", Toast.LENGTH_LONG).show()
+                    viewModel.setStatus(true)
                     findNavController().navigate(R.id.homeFragment)
                 } else {
                     Toast.makeText(requireContext(), "You're not verified yet!", Toast.LENGTH_LONG).show()
