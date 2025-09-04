@@ -72,7 +72,7 @@ class RegisterFragment : Fragment() {
                             if (viewModel.sendVerification()) {
                                 findNavController().navigate(R.id.action_registerFragment_to_verificationFragment)
                             } else {
-                                Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
                             }
                         } else {
                             Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()
