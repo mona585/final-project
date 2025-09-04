@@ -1,5 +1,6 @@
 package mona.mohamed.recipeapp.view.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -13,10 +14,11 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.databinding.FragmentLoginBinding
 import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.RecipeActivity
 import mona.mohamed.recipeapp.model.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
-
+import mona.mohamed.recipeapp.navigateToRecipeActivity
 class LoginFragment : Fragment() {
     private val viewModel: AuthViewModel by activityViewModels {
         AuthViewModelFactory(AuthRepositoryImp(requireContext()))
@@ -57,7 +59,7 @@ class LoginFragment : Fragment() {
                         if (viewModel.login(email, password)) {
                             if (viewModel.isVerified()) {
                                 viewModel.setStatus(true)
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                                navigateToRecipeActivity()
                             } else {
                                 findNavController().navigate(R.id.action_loginFragment_to_verificationFragment)
                             }

@@ -14,6 +14,7 @@ import mona.mohamed.recipeapp.model.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 
+import mona.mohamed.recipeapp.navigateToRecipeActivity
 class SplashFragment : Fragment() {
     private val viewModel: AuthViewModel by activityViewModels {
         AuthViewModelFactory(AuthRepositoryImp(requireContext()))
@@ -39,7 +40,7 @@ class SplashFragment : Fragment() {
         view.postDelayed({
 //            viewModel.updateIsLoggedIn()
             if (viewModel.isUserLoggedIn()) {
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                navigateToRecipeActivity()
             } else {
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
