@@ -65,7 +65,7 @@ class RegisterFragment : Fragment() {
                         if (viewModel.register(email, password)) {
                             viewModel.setUserName(fullName)
                             if (viewModel.sendVerification()) {
-                                findNavController().navigate(R.id.verificationFragment)
+                                findNavController().navigate(R.id.action_registerFragment_to_verificationFragment)
                             } else {
                                 Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
                             }

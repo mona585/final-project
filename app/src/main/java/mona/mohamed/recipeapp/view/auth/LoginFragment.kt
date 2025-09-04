@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
                                 viewModel.setStatus(true)
                                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                             } else {
-                                findNavController().navigate(R.id.verificationFragment)
+                                findNavController().navigate(R.id.action_loginFragment_to_verificationFragment)
                             }
                         } else {
                             Toast.makeText(requireContext(), "Something went wrong.", Toast.LENGTH_LONG).show()

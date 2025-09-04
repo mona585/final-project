@@ -42,7 +42,7 @@ class VerificationFragment : Fragment() {
                 if (viewModel.isVerified()) {
                     Toast.makeText(requireContext(), "Verification successful. Welcome!", Toast.LENGTH_LONG).show()
                     viewModel.setStatus(true)
-                    findNavController().navigate(R.id.homeFragment)
+                    findNavController().navigate(R.id.action_verificationFragment_to_homeFragment)
                 } else {
                     Toast.makeText(requireContext(), "You're not verified yet!", Toast.LENGTH_LONG).show()
                 }

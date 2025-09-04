@@ -30,6 +30,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
     </fragment>
 
     <fragment
@@ -38,20 +41,13 @@
         android:label="Register"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/registerFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/registerFragment"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_registerFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="mona.mohamed.recipeapp.home.HomeFragment"
+        android:name="mona.mohamed.recipeapp.view.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -65,6 +61,10 @@
         android:id="@+id/verificationFragment"
         android:name="mona.mohamed.recipeapp.view.auth.VerificationFragment"
         android:label="VerificationFragment"
-        tools:layout="@layout/fragment_verification"/>
+        tools:layout="@layout/fragment_verification">
+        <action
+            android:id="@+id/action_verificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>
