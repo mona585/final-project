@@ -35,8 +35,6 @@ class VerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.verifyMessageTextView.text = "Please check your email for verification link"
-
         binding.btnCheckVerified.setOnClickListener {
             lifecycleScope.launch {
                 if (viewModel.isVerified()) {
