@@ -86,19 +86,19 @@
 
     <fragment
         android:id="@+id/FavoritesFragment"
-        android:name="mona.mohamed.recipeapp.FavoritesFragmentPack.FavoritesFragment"
+        android:name="mona.mohamed.recipeapp.favorites.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="mona.mohamed.recipeapp.SearchFragment.SearchFragment"
+        android:name="mona.mohamed.recipeapp.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="mona.mohamed.recipeapp.AboutFragment.AboutFragment"
+        android:name="mona.mohamed.recipeapp.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
 
