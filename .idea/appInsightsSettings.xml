@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="mona.mohamed.recipeapp" />
+                  <option name="mobileSdkAppId" value="1:111272572151:android:7d88ee81eb5e07433b8ff2" />
+                  <option name="projectId" value="iti-final-project-cf31e" />
+                  <option name="projectNumber" value="111272572151" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
