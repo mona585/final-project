@@ -1,7 +1,6 @@
 package mona.mohamed.recipeapp.model
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.userProfileChangeRequest
