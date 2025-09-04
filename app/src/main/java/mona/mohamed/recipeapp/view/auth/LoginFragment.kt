@@ -56,6 +56,7 @@ class LoginFragment : Fragment() {
                     lifecycleScope.launch {
                         if (viewModel.login(email, password)) {
                             if (viewModel.isVerified()) {
+                                viewModel.setStatus(true)
                                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                             } else {
                                 findNavController().navigate(R.id.verificationFragment)
