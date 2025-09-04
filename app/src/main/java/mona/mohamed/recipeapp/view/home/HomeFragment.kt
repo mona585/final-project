@@ -1,16 +1,22 @@
-package mona.mohamed.recipeapp.home
+package mona.mohamed.recipeapp.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import mona.mohamed.recipeapp.databinding.FragmentHomeBinding
 import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.viewmodel.AuthViewModel
+import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 
 class HomeFragment : Fragment() {
-
+    private val viewModel: AuthViewModel by activityViewModels {
+        AuthViewModelFactory(AuthRepositoryImp(requireContext()))
+    }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -26,11 +32,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutButton.setOnClickListener {
-            requireContext().getSharedPreferences("prefs", android.content.Context.MODE_PRIVATE)
-                .edit()
-                .putBoolean("isLoggedIn", false)
-                .apply()
-
+            viewModel.logout()
+            viewModel.setStatus(false)
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
     }

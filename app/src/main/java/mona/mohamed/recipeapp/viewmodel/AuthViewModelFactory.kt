@@ -1,8 +1,8 @@
-package mona.mohamed.demo12.viewmodel
+package mona.mohamed.recipeapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.demo12.model.AuthRepository
+import mona.mohamed.recipeapp.model.AuthRepository
 
 class AuthViewModelFactory(val authRepository: AuthRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

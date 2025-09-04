@@ -14,13 +14,7 @@
         tools:ignore="UnusedAttribute">
 
         <activity
-        Login--register-and-splash
-            android:name=".MainActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".auth.AuthActivity"
-        master
+            android:name=".view.auth.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

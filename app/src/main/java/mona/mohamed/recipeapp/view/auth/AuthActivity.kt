@@ -1,4 +1,4 @@
-package mona.mohamed.recipeapp.auth
+package mona.mohamed.recipeapp.view.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
