@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "111272572151",
-    "project_id": "iti-final-project-cf31e",
-    "storage_bucket": "iti-final-project-cf31e.firebasestorage.app"
+    "project_number": "382163919044",
+    "project_id": "device-streaming-942843e3",
+    "storage_bucket": "device-streaming-942843e3.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:111272572151:android:7d88ee81eb5e07433b8ff2",
+        "mobilesdk_app_id": "1:382163919044:android:caf680a91aeaa5ff8e2991",
         "android_client_info": {
           "package_name": "mona.mohamed.demo12"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAg-VMNiOoE3D9ADDMNpWe-2AuSrEX5M1s"
+          "current_key": "AIzaSyB2Mo589Q0FSL80G4oncJ1_8ccoTvt8vOA"
         }
       ],
       "services": {

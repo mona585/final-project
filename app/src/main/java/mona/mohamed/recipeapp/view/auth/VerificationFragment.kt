@@ -16,7 +16,7 @@ import mona.mohamed.recipeapp.model.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 import kotlin.getValue
-
+import mona.mohamed.recipeapp.navigateToRecipeActivity
 class VerificationFragment : Fragment() {
     private val viewModel: AuthViewModel by activityViewModels {
         AuthViewModelFactory(AuthRepositoryImp(requireContext()))
@@ -40,7 +40,7 @@ class VerificationFragment : Fragment() {
                 if (viewModel.isVerified()) {
                     Toast.makeText(requireContext(), "Verification successful. Welcome!", Toast.LENGTH_LONG).show()
                     viewModel.setStatus(true)
-                    findNavController().navigate(R.id.action_verificationFragment_to_homeFragment)
+                    navigateToRecipeActivity()
                 } else {
                     Toast.makeText(requireContext(), "You're not verified yet!", Toast.LENGTH_LONG).show()
                 }
