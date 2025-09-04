@@ -9,32 +9,32 @@
 
     <TextView
         android:id="@+id/verifyMessageTextView"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/field_default_width"
         android:layout_height="wrap_content"
         android:paddingBottom="24dp"
-        android:text="Please check your email for verification link"
-        android:textAlignment="center"
+        android:text="@string/verification_text"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnCheckVerified"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/button_default_width"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#C56260"
-        android:text="I’ve Verified"
+        android:text="@string/check_verify_button_text"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
     <Button
         android:id="@+id/btnResendEmail"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/button_default_width"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#C56260"
-        android:text="Resend Email"
+        android:text="@string/resend_email_button_text"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 

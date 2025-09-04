@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="dark_gray">#423F3F</color>
+
     <!-- Primary colors -->
     <color name="colorPrimary">#FF6B6B</color>
     <color name="colorPrimaryDark">#EE5A5A</color>
@@ -19,4 +22,5 @@
     <color name="black">#000000</color>
     <color name="gray_light">#E0E0E0</color>
     <color name="transparent">#00000000</color>
+
 </resources>
