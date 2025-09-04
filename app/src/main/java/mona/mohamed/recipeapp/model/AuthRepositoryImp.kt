@@ -13,6 +13,15 @@ class AuthRepositoryImp(private val context: Context): AuthRepository {
 
     override fun getCurrentUser() = auth.currentUser
 
+    override suspend fun reloadUser(user: FirebaseUser): Boolean {
+        return try {
+            user.reload().await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     override suspend fun signIn(email: String, password: String): Boolean {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()

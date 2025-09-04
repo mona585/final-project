@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
 
         binding.logoutButton.setOnClickListener {
             viewModel.logout()
-
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
     }

@@ -38,19 +38,19 @@ class VerificationFragment : Fragment() {
         binding.textCheckVerified.text = "Please check your email for verification link"
 
         binding.btnCheckVerified.setOnClickListener {
-            val result = viewModel.isVerified()
-            if (result) {
-                Toast.makeText(requireContext(), "Verification successful. Welcome!", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                Toast.makeText(requireContext(), "You're not verified yet!", Toast.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                if (viewModel.isVerified()) {
+                    Toast.makeText(requireContext(), "Verification successful. Welcome!", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.homeFragment)
+                } else {
+                    Toast.makeText(requireContext(), "You're not verified yet!", Toast.LENGTH_LONG).show()
+                }
             }
         }
 
         binding.btnResendEmail.setOnClickListener {
             lifecycleScope.launch {
-                val result = viewModel.sendVerification()
-                if (result) {
+                if (viewModel.sendVerification()) {
                     Toast.makeText(requireContext(), "Email has been sent.", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()

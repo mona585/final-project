@@ -5,6 +5,8 @@ import com.google.firebase.auth.FirebaseUser
 interface AuthRepository {
     fun getCurrentUser(): FirebaseUser?
 
+    suspend fun reloadUser(user: FirebaseUser): Boolean
+
     suspend fun signIn(email: String, password: String): Boolean
 
     fun signOut()

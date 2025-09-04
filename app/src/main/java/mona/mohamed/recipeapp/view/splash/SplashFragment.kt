@@ -38,7 +38,6 @@ class SplashFragment : Fragment() {
 
         view.postDelayed({
             viewModel.updateIsLoggedIn()
-
             if (viewModel.isUserLoggedIn()) {
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
             } else {

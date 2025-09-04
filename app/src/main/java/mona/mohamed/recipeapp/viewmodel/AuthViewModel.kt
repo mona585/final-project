@@ -17,9 +17,10 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
 
     fun isUserLoggedIn() = authRepository.isLoggedIn()
 
-    fun isVerified(): Boolean {
+    suspend fun isVerified(): Boolean {
         val user = authRepository.getCurrentUser()
-        return authRepository.isEmailVerified(user!!)
+        authRepository.reloadUser(user!!)
+        return authRepository.isEmailVerified(user)
     }
 
     suspend fun sendVerification(): Boolean {
@@ -51,13 +52,15 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
         }
     }
 
-    fun getUserName(): String {
+    suspend fun getUserName(): String {
         val user = authRepository.getCurrentUser()
-        return authRepository.getCurrentUserName(user!!)!!
+        authRepository.reloadUser(user!!)
+        return authRepository.getCurrentUserName(user)!!
     }
 
-    fun getUserId(): String {
+    suspend fun getUserId(): String {
         val user = authRepository.getCurrentUser()
-        return authRepository.getCurrentUserId(user!!)!!
+        authRepository.reloadUser(user!!)
+        return authRepository.getCurrentUserId(user)!!
     }
 }

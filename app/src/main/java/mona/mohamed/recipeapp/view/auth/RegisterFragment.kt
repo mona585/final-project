@@ -62,11 +62,9 @@ class RegisterFragment : Fragment() {
                 else -> {
                     lifecycleScope.launch {
                         val fullName = "$firstName $lastName"
-                        val result = viewModel.register(email, password)
-                        if (result) {
+                        if (viewModel.register(email, password)) {
                             viewModel.setUserName(fullName)
-                            val sent = viewModel.sendVerification()
-                            if (sent) {
+                            if (viewModel.sendVerification()) {
                                 findNavController().navigate(R.id.verificationFragment)
                             } else {
                                 Toast.makeText(requireContext(), "Something wrong with the email you entered, please try again.", Toast.LENGTH_LONG).show()
