@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "111272572151",
-    "project_id": "iti-final-project-cf31e",
-    "storage_bucket": "iti-final-project-cf31e.firebasestorage.app"
+    "project_number": "780643445609",
+    "project_id": "recipeapp-d5d83",
+    "storage_bucket": "recipeapp-d5d83.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:111272572151:android:7d88ee81eb5e07433b8ff2",
+        "mobilesdk_app_id": "1:780643445609:android:4da82ca81ff2590205ebf8",
         "android_client_info": {
-          "package_name": "mona.mohamed.demo12"
+          "package_name": "mona.mohamed.recipeapp"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAg-VMNiOoE3D9ADDMNpWe-2AuSrEX5M1s"
+          "current_key": "AIzaSyBZa2Crq9fPa7g_QT7W85yXnpoUmKaSQJs"
         }
       ],
       "services": {
