@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.demo12.R
+import mona.mohamed.recipeapp.R
 import mona.mohamed.demo12.model.AuthRepositoryImp
 import mona.mohamed.demo12.viewmodel.AuthViewModel
 import mona.mohamed.demo12.viewmodel.AuthViewModelFactory
