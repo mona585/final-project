@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/splash_background"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background_image_desc"
         android:scaleType="centerCrop"
         android:src="@drawable/splash_background"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,14 +17,32 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logo"
-        app:layout_constraintTop_toTopOf="parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/logo_image_desc"
+            android:src="@drawable/splash_placeholder_clean"
+            android:layout_gravity="center"
+            android:alpha="0" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/splashAnimation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/splash_animation"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            android:alpha="0" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
