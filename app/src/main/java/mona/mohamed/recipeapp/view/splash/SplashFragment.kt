@@ -33,9 +33,9 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val logo = binding.logoImage
-        val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
-        logo.startAnimation(fadeIn)
+//        val logo = binding.logoImage
+//        val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+//        logo.startAnimation(fadeIn)
 
         view.postDelayed({
 //            viewModel.updateIsLoggedIn()
