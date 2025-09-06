@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.data.RetrofitInstance
 import mona.mohamed.recipeapp.databinding.FragmentSearchBinding
+import androidx.navigation.fragment.findNavController
 import mona.mohamed.recipeapp.repository.MealsRepository
 
 class SearchFragment : Fragment() {
@@ -48,12 +49,15 @@ class SearchFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = SearchAdapter { meal ->
-            Toast.makeText(requireContext(), "Clicked ${meal.name}", Toast.LENGTH_SHORT).show()
-            // TODO: Navigate to RecipeDetailFragment using NavController
+            val action = SearchFragmentDirections
+                .actionSearchFragmentToMealDetailFragment(meal.id)
+            findNavController().navigate(action)
         }
         binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.searchRecyclerView.adapter = adapter
     }
+
+
 
     private fun setupFilterSpinner() {
         val filterOptions = listOf("Category", "Ingredient", "Country")

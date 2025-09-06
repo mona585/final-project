@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +46,12 @@ class FavoritesFragment : Fragment() {
         binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favoritesRecyclerView.adapter = adapter
 
-        favoritesViewModel.getFavorites("dummyUserId").observe(viewLifecycleOwner) { favorites ->
+        // Get userId from SharedPreferences
+        val userId = requireContext()
+            .getSharedPreferences("prefs", Context.MODE_PRIVATE)
+            .getString("userId", "") ?: ""
+
+        favoritesViewModel.getFavorites(userId).observe(viewLifecycleOwner) { favorites ->
             if (favorites.isEmpty()) {
                 binding.emptyStateText.visibility = View.VISIBLE
                 binding.favoritesRecyclerView.visibility = View.GONE
@@ -56,6 +62,7 @@ class FavoritesFragment : Fragment() {
             }
         }
     }
+
 
     private fun showDeleteDialog(favorite: mona.mohamed.recipeapp.data.FavoriteEntity) {
         AlertDialog.Builder(requireContext())
