@@ -78,6 +78,11 @@ class HomeFragment : Fragment() {
                 navigateToMealDetail(meal)
             }
         }
+        binding.btnCookNow.setOnClickListener {
+            viewModel.suggestedMeal.value?.let { meal ->
+                navigateToMealDetail(meal)
+            }
+        }
     }
 
     private fun navigateToMealDetail(meal: Meal) {

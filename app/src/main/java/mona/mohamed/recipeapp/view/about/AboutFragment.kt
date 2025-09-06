@@ -10,8 +10,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.RecipeApplication
 import mona.mohamed.recipeapp.databinding.FragmentAboutBinding
+import mona.mohamed.recipeapp.model.AuthRepository
+import mona.mohamed.recipeapp.model.AuthRepositoryImp // Import your implementation
 
 class AboutFragment : Fragment() {
 
@@ -19,8 +24,10 @@ class AboutFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: AboutViewModel
 
-    // Track if we're initializing to prevent triggering listener during setup
-    private var isInitializing = true
+    // Initialize AuthRepository - you might want to inject this via Dagger/Hilt
+    private val authRepository: AuthRepository by lazy {
+        (requireActivity().application as RecipeApplication).authRepository
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,16 +42,14 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize ViewModel with Factory
-        val factory = AboutViewModelFactory(requireContext())
+        val factory = AboutViewModelFactory(requireContext(), authRepository)
         viewModel = ViewModelProvider(this, factory).get(AboutViewModel::class.java)
 
         setupUI()
+        observeViewModel()
     }
 
     private fun setupUI() {
-        // Dark Mode Switch - Modified to prevent immediate recreation
-
-
         // Click listeners
         binding.layoutAbout.setOnClickListener {
             showAboutDialog()
@@ -63,6 +68,17 @@ class AboutFragment : Fragment() {
         }
     }
 
+    private fun observeViewModel() {
+        // Observe user name
+        viewModel.userName.observe(viewLifecycleOwner) { name ->
+            binding.tvUserName.text = name
+        }
+
+        // Observe user email
+        viewModel.userEmail.observe(viewLifecycleOwner) { email ->
+            binding.tvUserEmail.text = email
+        }
+    }
 
     private fun showAboutDialog() {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_about, null)
@@ -101,10 +117,24 @@ class AboutFragment : Fragment() {
     }
 
     private fun performLogout() {
-        viewModel.clearAllData()
-        requireActivity().finish()
-    }
+        // Clear the login status - THIS IS THE KEY!
+        authRepository.setLoggedIn(false)
 
+        // Sign out from Firebase
+        authRepository.signOut()
+
+        // Clear local data
+        viewModel.clearAllData()
+
+        // Navigate to login fragment
+        findNavController().navigate(
+            R.id.action_aboutFragment_to_loginFragment,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(R.id.nav_recipe_graph, true)
+                .build()
+        )
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

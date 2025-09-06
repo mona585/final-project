@@ -16,6 +16,7 @@ interface AuthRepository {
     suspend fun setCurrentUserName(user: FirebaseUser, name: String)
 
     fun getCurrentUserName(user: FirebaseUser): String?
+    fun getCurrentUserEmail(user: FirebaseUser): String?
 
     fun getCurrentUserId(user: FirebaseUser): String?
 

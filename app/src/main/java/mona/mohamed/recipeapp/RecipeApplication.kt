@@ -3,17 +3,21 @@ package mona.mohamed.recipeapp
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import mona.mohamed.recipeapp.model.AuthRepository
+import mona.mohamed.recipeapp.model.AuthRepositoryImp
 
 class RecipeApplication : Application() {
 
     companion object {
         private const val PREFS_NAME = "recipe_app_prefs"
         private const val KEY_DARK_MODE = "dark_mode"
+
     }
+    lateinit var authRepository: AuthRepository
 
     override fun onCreate() {
         super.onCreate()
-
+        authRepository = AuthRepositoryImp(this)
         // Apply dark mode on app startup
         applyDarkModeFromPreferences()
     }

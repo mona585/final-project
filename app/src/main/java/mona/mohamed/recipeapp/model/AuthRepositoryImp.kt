@@ -50,6 +50,7 @@ class AuthRepositoryImp(private val context: Context): AuthRepository {
     }
 
     override fun getCurrentUserName(user: FirebaseUser) = user.displayName
+    override fun getCurrentUserEmail(user: FirebaseUser) = user.email
 
     override fun getCurrentUserId(user: FirebaseUser) = user.uid
 

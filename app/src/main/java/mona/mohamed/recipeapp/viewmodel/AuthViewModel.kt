@@ -44,7 +44,19 @@ class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
         authRepository.reloadUser(user!!)
         return authRepository.getCurrentUserName(user)!!
     }
-
+    suspend fun getUserEmail(): String? {
+        return try {
+            val user = authRepository.getCurrentUser()
+            if (user != null) {
+                authRepository.reloadUser(user)
+                authRepository.getCurrentUserEmail(user) // You'll need to implement this
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
     suspend fun getUserId(): String {
         val user = authRepository.getCurrentUser()
         authRepository.reloadUser(user!!)
