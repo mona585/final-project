@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="mona.mohamed.recipeapp.about.AboutFragment"
+        android:name="mona.mohamed.recipeapp.view.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
     <fragment

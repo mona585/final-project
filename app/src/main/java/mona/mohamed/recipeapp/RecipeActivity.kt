@@ -1,5 +1,6 @@
 package mona.mohamed.recipeapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -13,7 +14,11 @@ class RecipeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+// Add this temporarily in RecipeActivity.onCreate() before anything else
+        getSharedPreferences("recipe_app_prefs", Context.MODE_PRIVATE)
+            .edit()
+            .remove("dark_mode")
+            .apply()
         // Inflate the layout
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)

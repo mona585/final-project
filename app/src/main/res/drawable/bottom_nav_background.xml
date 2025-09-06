@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/white"/>
+    <solid android:color="?attr/colorSurface"/>
+    <!-- This will automatically use the right color for each theme -->
     <corners
         android:topLeftRadius="16dp"
         android:topRightRadius="16dp"/>
