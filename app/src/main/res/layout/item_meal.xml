@@ -25,10 +25,12 @@
             android:id="@+id/tvMealName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:padding="8dp"
             android:textSize="14sp"
             android:maxLines="2"
             android:ellipsize="end"
+            android:gravity="center_vertical"
             tools:text="Arrabiata Penne"/>
 
     </LinearLayout>
