@@ -52,16 +52,16 @@ Recipe App is a modern Android application developed as the final project for IT
 <div align="center">
 <table>
   <tr>
-    <td><img src="screenshots/splash.png" width="200" alt="Splash Screen"/></td>
-    <td><img src="screenshots/login.png" width="200" alt="Login Screen"/></td>
-    <td><img src="screenshots/home.png" width="200" alt="Home Screen"/></td>
-    <td><img src="screenshots/details.png" width="200" alt="Recipe Details"/></td>
+    <td><img src="https://github.com/mona585/final-project/blob/master/screenshots/Screenshot_20250907_112016.jpg" width="200" alt="Splash Screen"/></td>
+    <td><img src="https://github.com/mona585/final-project/blob/master/screenshots/Screenshot_20250907_112027.jpg" width="200" alt="Home Screen"/></td>
+    <td><img src="https://github.com/mona585/final-project/blob/master/screenshots/Screenshot_20250907_112114.jpg" width="200" alt="Search Screen"/></td>
+    <td><img src="https://github.com/mona585/final-project/blob/master/screenshots/Screenshot_20250907_112100.jpg" width="200" alt="Favotites Screen"/></td>
   </tr>
   <tr>
     <td align="center">Splash</td>
-    <td align="center">Login</td>
     <td align="center">Home</td>
-    <td align="center">Details</td>
+    <td align="center">Seearch</td>
+    <td align="center">Favorites</td>
   </tr>
 </table>
 </div>
@@ -78,7 +78,7 @@ Recipe App is a modern Android application developed as the final project for IT
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/recipe-app.git
+   git clone https://github.com/mona585/final-project
    ```
 
 2. Open the project in Android Studio
@@ -114,24 +114,24 @@ This project was developed collaboratively by a talented team of developers:
 <table align="center">
   <tr>
     <td align="center">
-      <img src="https://github.com/identicons/mark.png" width="100px;" alt="Mark Eskander"/><br />
+      <img src="https://avatars.githubusercontent.com/u/50965627?v=4" width="100px;" alt="Mark Eskander"/><br />
       <sub><b>Mark Eskander Ebied</b></sub><br />
       <a href="https://github.com/markeskander" title="Code">💻</a>
     </td>
     <td align="center">
       <img src="https://github.com/identicons/alhusain.png" width="100px;" alt="Al-Husain Yaser"/><br />
       <sub><b>Al-Husain Yaser Ebrahim</b></sub><br />
-      <a href="https://github.com/alhusain" title="Code">💻</a>
+      <a href="https://github.com/Al-HusainYaser" title="Code">💻</a>
     </td>
     <td align="center">
-      <img src="https://github.com/identicons/esraa.png" width="100px;" alt="Esraa Reda"/><br />
+      <img src="https://avatars.githubusercontent.com/u/114184717?v=4" width="100px;" alt="Esraa Reda"/><br />
       <sub><b>Esraa Reda Elsayed Ali Hasan</b></sub><br />
-      <a href="https://github.com/esraareda" title="Code">💻</a>
+      <a href="https://github.com/Esraa-Reda189" title="Code">💻</a>
     </td>
     <td align="center">
       <img src="https://github.com/identicons/mona.png" width="100px;" alt="Mona Mohamed"/><br />
       <sub><b>Mona Mohamed Awad</b></sub><br />
-      <a href="https://github.com/monamohamed" title="Code">💻</a>
+      <a href="https://github.com/mona585" title="Code">💻</a>
     </td>
   </tr>
 </table>
@@ -176,21 +176,19 @@ This app uses [TheMealDB API](https://www.themealdb.com/api.php) for recipe data
 - [ ] Recipe rating system
 - [ ] Multi-language support
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
 - **ITI (Information Technology Institute)** - For the learning opportunity
 - **TheMealDB** - For providing the free recipe API
 - **Firebase** - For authentication services
-- All instructors and mentors who guided us through this journey
+- Our instructors and mentor Eng. Yasmeen Hosny
 
 ---
 
 <div align="center">
   Made with ❤️ by ITI Students
   <br>
-  <strong>Final Project 2024</strong>
+  <strong>Final Project 2025</strong>
 </div>
