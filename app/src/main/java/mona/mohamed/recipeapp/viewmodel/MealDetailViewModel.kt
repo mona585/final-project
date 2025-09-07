@@ -1,4 +1,4 @@
-package mona.mohamed.recipeapp.view.mealDetail
+package mona.mohamed.recipeapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.data.models.Meal
-import mona.mohamed.recipeapp.repository.FavoriteRepository
-import mona.mohamed.recipeapp.repository.MealRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.MealRepository
 
 class MealDetailViewModel(
     private val favoriteRepository: FavoriteRepository

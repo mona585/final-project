@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import mona.mohamed.recipeapp.databinding.FragmentHomeBinding
 import mona.mohamed.recipeapp.R
 import mona.mohamed.recipeapp.data.models.Meal
-import mona.mohamed.recipeapp.model.AuthRepositoryImp
-import mona.mohamed.recipeapp.viewmodel.AuthViewModel
-import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
+import mona.mohamed.recipeapp.viewmodel.HomeViewModel
+
 // HomeFragment.kt
 class HomeFragment : Fragment() {
 

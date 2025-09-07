@@ -1,9 +1,9 @@
-package mona.mohamed.recipeapp.view.about
+package mona.mohamed.recipeapp.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.recipeapp.model.AuthRepository
+import mona.mohamed.recipeapp.data.repository.AuthRepository
 
 class AboutViewModelFactory(
     private val context: Context,

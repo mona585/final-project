@@ -1,4 +1,4 @@
-package mona.mohamed.recipeapp.repository
+package mona.mohamed.recipeapp.data.repository
 
 import mona.mohamed.recipeapp.network.RetrofitInstance
 

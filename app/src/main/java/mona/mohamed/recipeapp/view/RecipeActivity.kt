@@ -1,13 +1,13 @@
-package mona.mohamed.recipeapp
+package mona.mohamed.recipeapp.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import mona.mohamed.recipeapp.R
 import mona.mohamed.recipeapp.databinding.ActivityRecipeBinding
+
 class RecipeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecipeBinding

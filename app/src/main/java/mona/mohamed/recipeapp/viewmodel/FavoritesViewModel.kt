@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import mona.mohamed.recipeapp.data.local.FavoriteMeal
-import mona.mohamed.recipeapp.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
 
 class FavoritesViewModel(
     private val favoriteRepository: FavoriteRepository

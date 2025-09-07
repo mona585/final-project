@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
-import android.webkit.WebSettings
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,13 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import mona.mohamed.recipeapp.R
-import mona.mohamed.recipeapp.RecipeApplication
+import mona.mohamed.recipeapp.view.RecipeApplication
 import mona.mohamed.recipeapp.data.local.RecipeDatabase
 import mona.mohamed.recipeapp.data.models.Meal
-import mona.mohamed.recipeapp.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
 import mona.mohamed.recipeapp.databinding.FragmentMealDetailBinding
-import mona.mohamed.recipeapp.view.mealDetail.MealDetailViewModel
-import mona.mohamed.recipeapp.view.mealDetail.MealDetailViewModelFactory
+import mona.mohamed.recipeapp.viewmodel.MealDetailViewModel
+import mona.mohamed.recipeapp.viewmodel.MealDetailViewModelFactory
 
 class MealDetailFragment : Fragment() {
 

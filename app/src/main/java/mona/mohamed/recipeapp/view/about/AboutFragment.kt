@@ -7,16 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import mona.mohamed.recipeapp.R
-import mona.mohamed.recipeapp.RecipeApplication
+import mona.mohamed.recipeapp.view.RecipeApplication
 import mona.mohamed.recipeapp.databinding.FragmentAboutBinding
-import mona.mohamed.recipeapp.model.AuthRepository
-import mona.mohamed.recipeapp.model.AuthRepositoryImp // Import your implementation
+import mona.mohamed.recipeapp.data.repository.AuthRepository
+import mona.mohamed.recipeapp.viewmodel.AboutViewModel
+import mona.mohamed.recipeapp.viewmodel.AboutViewModelFactory
 
 class AboutFragment : Fragment() {
 

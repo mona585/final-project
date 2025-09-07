@@ -1,4 +1,4 @@
-package mona.mohamed.recipeapp.model
+package mona.mohamed.recipeapp.data.repository
 
 import com.google.firebase.auth.FirebaseUser
 
