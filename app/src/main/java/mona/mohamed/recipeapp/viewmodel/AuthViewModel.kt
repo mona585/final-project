@@ -1,7 +1,7 @@
 package mona.mohamed.recipeapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import mona.mohamed.recipeapp.model.AuthRepository
+import mona.mohamed.recipeapp.data.repository.AuthRepository
 
 class AuthViewModel(private val authRepository: AuthRepository): ViewModel() {
 //    fun updateIsLoggedIn() {

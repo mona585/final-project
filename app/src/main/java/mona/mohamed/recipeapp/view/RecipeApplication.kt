@@ -1,10 +1,9 @@
-package mona.mohamed.recipeapp
+package mona.mohamed.recipeapp.view
 
 import android.app.Application
-import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import mona.mohamed.recipeapp.model.AuthRepository
-import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.data.repository.AuthRepository
+import mona.mohamed.recipeapp.data.repository.AuthRepositoryImp
 
 class RecipeApplication : Application() {
 
@@ -23,7 +22,7 @@ class RecipeApplication : Application() {
     }
 
     private fun applyDarkModeFromPreferences() {
-        val sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val isDarkMode = sharedPref.getBoolean(KEY_DARK_MODE, false)
 
         val mode = if (isDarkMode) {

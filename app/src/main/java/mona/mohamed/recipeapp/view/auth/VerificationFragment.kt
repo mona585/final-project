@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
-import mona.mohamed.recipeapp.R
 import mona.mohamed.recipeapp.databinding.FragmentVerificationBinding
-import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.data.repository.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 import kotlin.getValue
-import mona.mohamed.recipeapp.navigateToRecipeActivity
+import mona.mohamed.recipeapp.view.navigateToRecipeActivity
 class VerificationFragment : Fragment() {
     private val viewModel: AuthViewModel by activityViewModels {
         AuthViewModelFactory(AuthRepositoryImp(requireContext()))

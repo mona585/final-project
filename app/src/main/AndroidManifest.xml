@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp"
         tools:ignore="UnusedAttribute"
-        android:name=".RecipeApplication">
+        android:name=".view.RecipeApplication">
 
         <activity
             android:name=".view.auth.AuthActivity"
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-             android:name=".RecipeActivity"
+             android:name=".view.RecipeActivity"
              android:exported="false" />
 
     </application>

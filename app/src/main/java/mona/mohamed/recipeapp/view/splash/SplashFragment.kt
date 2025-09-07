@@ -13,11 +13,11 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import mona.mohamed.recipeapp.databinding.FragmentSplashBinding
 import mona.mohamed.recipeapp.R
-import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.data.repository.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 
-import mona.mohamed.recipeapp.navigateToRecipeActivity
+import mona.mohamed.recipeapp.view.navigateToRecipeActivity
 class SplashFragment : Fragment() {
     private val viewModel: AuthViewModel by activityViewModels {
         AuthViewModelFactory(AuthRepositoryImp(requireContext()))

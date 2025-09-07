@@ -1,9 +1,8 @@
-package mona.mohamed.recipeapp.repository
+package mona.mohamed.recipeapp.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import mona.mohamed.recipeapp.data.local.FavoriteMeal
 import mona.mohamed.recipeapp.data.local.FavoriteMealDao
-import mona.mohamed.recipeapp.model.AuthRepository
 
 class FavoriteRepository(
     private val favoriteMealDao: FavoriteMealDao,

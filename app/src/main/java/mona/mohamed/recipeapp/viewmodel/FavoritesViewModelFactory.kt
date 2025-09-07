@@ -2,7 +2,7 @@ package mona.mohamed.recipeapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.recipeapp.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
 
 class FavoritesViewModelFactory(
     private val favoriteRepository: FavoriteRepository

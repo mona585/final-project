@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import mona.mohamed.recipeapp.databinding.FragmentRegisterBinding
 import mona.mohamed.recipeapp.R
-import mona.mohamed.recipeapp.model.AuthRepositoryImp
+import mona.mohamed.recipeapp.data.repository.AuthRepositoryImp
 import mona.mohamed.recipeapp.viewmodel.AuthViewModel
 import mona.mohamed.recipeapp.viewmodel.AuthViewModelFactory
 

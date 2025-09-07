@@ -2,7 +2,7 @@ package mona.mohamed.recipeapp.search
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import mona.mohamed.recipeapp.repository.MealRepository
+import mona.mohamed.recipeapp.data.repository.MealRepository
 
 class SearchViewModel : ViewModel() {
 

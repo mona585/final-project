@@ -1,9 +1,9 @@
-package mona.mohamed.recipeapp.view.mealDetail
+package mona.mohamed.recipeapp.viewmodel
 
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.recipeapp.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
 
 
 class MealDetailViewModelFactory(

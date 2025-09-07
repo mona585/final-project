@@ -1,4 +1,4 @@
-package mona.mohamed.recipeapp.model
+package mona.mohamed.recipeapp.data.repository
 
 import android.content.Context
 import android.widget.Toast
@@ -7,6 +7,7 @@ import com.google.firebase.auth.userProfileChangeRequest
 import androidx.core.content.edit
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.tasks.await
 
 class AuthRepositoryImp(private val context: Context): AuthRepository {

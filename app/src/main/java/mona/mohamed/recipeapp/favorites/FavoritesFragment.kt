@@ -11,11 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
-import mona.mohamed.recipeapp.RecipeApplication
-import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.view.RecipeApplication
 import mona.mohamed.recipeapp.data.local.FavoriteMeal
 import mona.mohamed.recipeapp.data.local.RecipeDatabase
-import mona.mohamed.recipeapp.repository.FavoriteRepository
+import mona.mohamed.recipeapp.data.repository.FavoriteRepository
 import mona.mohamed.recipeapp.databinding.FragmentFavoritesBinding
 import mona.mohamed.recipeapp.viewmodel.FavoritesViewModel
 import mona.mohamed.recipeapp.viewmodel.FavoritesViewModelFactory

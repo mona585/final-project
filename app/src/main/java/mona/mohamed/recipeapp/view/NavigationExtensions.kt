@@ -1,9 +1,8 @@
-package mona.mohamed.recipeapp
+package mona.mohamed.recipeapp.view
 
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
-import mona.mohamed.recipeapp.RecipeActivity
 
 fun Fragment.navigateToRecipeActivity() {
     val intent = Intent(requireActivity(), RecipeActivity::class.java)
