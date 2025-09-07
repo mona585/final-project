@@ -1,14 +1,13 @@
-package mona.mohamed.recipeapp.viewmodel
+package mona.mohamed.recipeapp.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mona.mohamed.recipeapp.repository.MealsRepository
 
-class SearchViewModelFactory(private val repository: MealsRepository) :
-    ViewModelProvider.Factory {
+class SearchViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
-            return SearchViewModel(repository) as T
+            @Suppress("UNCHECKED_CAST")
+            return SearchViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,5 +1,6 @@
 package mona.mohamed.recipeapp.data
 
+import mona.mohamed.recipeapp.data.models.MealResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,6 +17,9 @@ interface MealsApiService {
 
     @GET("filter.php")
     suspend fun filterByIngredient(@Query("i") ingredient: String): MealsResponse
+
+    // In MealApi
+
 }
 
 data class MealsResponse(

@@ -11,4 +11,7 @@ class MealRepository {
     // In MealRepository.kt, add:
     suspend fun getMealDetails(mealId: String) =
         RetrofitInstance.api.getMealDetails(mealId)
+
+    // In MealRepository
+    suspend fun searchMealsByName(name: String) = RetrofitInstance.api.searchMealsByName(name)
 }
