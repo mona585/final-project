@@ -9,13 +9,14 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.launch
-import mona.mohamed.recipeapp.data.RetrofitInstance
-import mona.mohamed.recipeapp.databinding.FragmentSearchBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import mona.mohamed.recipeapp.repository.MealsRepository
+import androidx.recyclerview.widget.LinearLayoutManager
+import mona.mohamed.recipeapp.databinding.FragmentSearchBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
@@ -23,9 +24,10 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: SearchAdapter
-    private val mealsRepository by lazy { MealsRepository(RetrofitInstance.api) }
+    private lateinit var viewModel: SearchViewModel
 
-    private var allMeals: List<Meal> = emptyList()
+    private var searchJob: Job? = null
+    private val searchScope = MainScope()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +40,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize ViewModel
+        val factory = SearchViewModelFactory()
+        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+
         setupRecyclerView()
         setupFilterSpinner()
-        fetchMealsFromApi()
-
-        binding.searchEditText.addTextChangedListener { query ->
-            filterMeals(query.toString(), binding.filterSpinner.selectedItem.toString())
-        }
+        setupSearchInput()
+        observeViewModel()
     }
 
     private fun setupRecyclerView() {
@@ -57,10 +60,8 @@ class SearchFragment : Fragment() {
         binding.searchRecyclerView.adapter = adapter
     }
 
-
-
     private fun setupFilterSpinner() {
-        val filterOptions = listOf("Category", "Ingredient", "Country")
+        val filterOptions = listOf("Name", "Category", "Country")
         val spinnerAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
@@ -76,61 +77,66 @@ class SearchFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                filterMeals(binding.searchEditText.text.toString(), filterOptions[position])
+                val query = binding.searchEditText.text.toString()
+                viewModel.filterMeals(query, filterOptions[position])
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
+    private fun setupSearchInput() {
+        binding.searchEditText.addTextChangedListener { editable ->
+            val query = editable.toString()
+            val filterType = binding.filterSpinner.selectedItem.toString()
+
+            // Cancel previous search job
+            searchJob?.cancel()
+
+            if (query.isEmpty()) {
+                viewModel.filterMeals("", filterType)
+            } else {
+                // Debounce search - wait 500ms before searching
+                searchJob = searchScope.launch {
+                    delay(500)
+                    if (query.length >= 2) {
+                        viewModel.searchMeals(query)
+                    } else {
+                        viewModel.filterMeals(query, filterType)
+                    }
+                }
             }
         }
     }
 
-    private fun fetchMealsFromApi() {
-        lifecycleScope.launch {
-            try {
-                val response = mealsRepository.searchMeals("") // Fetch all meals
-                allMeals = response.meals?.map {
-                    Meal(
-                        id = it.idMeal,
-                        name = it.strMeal,
-                        ingredient = it.strInstructions ?: "",
-                        category = it.strCategory ?: "",
-                        country = it.strArea ?: ""
-                    )
-                } ?: emptyList()
+    private fun observeViewModel() {
+        viewModel.meals.observe(viewLifecycleOwner) { meals ->
+            adapter.submitList(meals)
 
-                adapter.submitList(allMeals)
-            } catch (e: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Error loading meals: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+            // Show empty state if needed
+            if (meals.isEmpty()) {
+                binding.emptyStateText?.visibility = View.VISIBLE
+                binding.searchRecyclerView.visibility = View.GONE
+            } else {
+                binding.emptyStateText?.visibility = View.GONE
+                binding.searchRecyclerView.visibility = View.VISIBLE
             }
         }
-    }
 
-    private fun filterMeals(query: String, filterType: String) {
-        val filtered = allMeals.filter { meal ->
-            when (filterType) {
-                "Category" -> meal.category.contains(query, ignoreCase = true)
-                "Ingredient" -> meal.ingredient.contains(query, ignoreCase = true)
-                "Country" -> meal.country.contains(query, ignoreCase = true)
-                else -> meal.name.contains(query, ignoreCase = true)
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
             }
         }
-        adapter.submitList(filtered)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        searchJob?.cancel()
         _binding = null
     }
 }
-
-data class Meal(
-    val id: String,
-    val name: String,
-    val ingredient: String,
-    val category: String,
-    val country: String
-)
