@@ -5,35 +5,56 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import mona.mohamed.recipeapp.data.FavoriteEntity
-import mona.mohamed.recipeapp.databinding.ItemFavoriteBinding
+import com.bumptech.glide.Glide
+import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.data.local.FavoriteMeal
+import mona.mohamed.recipeapp.databinding.ItemFavoriteMealBinding
 
 class FavoritesAdapter(
-    private val onDeleteClick: (FavoriteEntity) -> Unit
-) : ListAdapter<FavoriteEntity, FavoritesAdapter.FavoritesViewHolder>(DiffCallback()) {
+    private val onMealClick: (FavoriteMeal) -> Unit,
+    private val onDeleteClick: (FavoriteMeal) -> Unit
+) : ListAdapter<FavoriteMeal, FavoritesAdapter.FavoriteViewHolder>(FavoriteDiffCallback()) {
 
-    class FavoritesViewHolder(private val binding: ItemFavoriteBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: FavoriteEntity, onDeleteClick: (FavoriteEntity) -> Unit) {
-            binding.mealName.text = item.mealName
-            binding.deleteButton.setOnClickListener { onDeleteClick(item) }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
+        val binding = ItemFavoriteMealBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return FavoriteViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    inner class FavoriteViewHolder(
+        private val binding: ItemFavoriteMealBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(favorite: FavoriteMeal) {
+            binding.apply {
+                tvMealName.text = favorite.mealName
+                tvCategory.text = favorite.category ?: "Unknown"
+
+                Glide.with(itemView)
+                    .load(favorite.mealThumb)
+                    .placeholder(R.drawable.placeholder)
+                    .into(ivMealImage)
+
+                root.setOnClickListener { onMealClick(favorite) }
+                btnDelete.setOnClickListener { onDeleteClick(favorite) }
+            }
         }
     }
+}
 
-    class DiffCallback : DiffUtil.ItemCallback<FavoriteEntity>() {
-        override fun areItemsTheSame(oldItem: FavoriteEntity, newItem: FavoriteEntity) =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: FavoriteEntity, newItem: FavoriteEntity) =
-            oldItem == newItem
+class FavoriteDiffCallback : DiffUtil.ItemCallback<FavoriteMeal>() {
+    override fun areItemsTheSame(oldItem: FavoriteMeal, newItem: FavoriteMeal): Boolean {
+        return oldItem.mealId == newItem.mealId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
-        val binding = ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoritesViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
-        holder.bind(getItem(position), onDeleteClick)
+    override fun areContentsTheSame(oldItem: FavoriteMeal, newItem: FavoriteMeal): Boolean {
+        return oldItem == newItem
     }
 }

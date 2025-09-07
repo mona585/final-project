@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import mona.mohamed.recipeapp.data.AppDatabase
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.coroutines.launch
+import mona.mohamed.recipeapp.RecipeApplication
+import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.data.local.FavoriteMeal
+import mona.mohamed.recipeapp.data.local.RecipeDatabase
+import mona.mohamed.recipeapp.repository.FavoriteRepository
 import mona.mohamed.recipeapp.databinding.FragmentFavoritesBinding
-import mona.mohamed.recipeapp.repository.FavoritesRepository
 import mona.mohamed.recipeapp.viewmodel.FavoritesViewModel
 import mona.mohamed.recipeapp.viewmodel.FavoritesViewModelFactory
 
@@ -20,8 +25,9 @@ class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var favoritesViewModel: FavoritesViewModel
+    private lateinit var viewModel: FavoritesViewModel
     private lateinit var adapter: FavoritesAdapter
+    private lateinit var favoriteRepository: FavoriteRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,24 +40,40 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dao = AppDatabase.getDatabase(requireContext()).favoriteDao()
-        val repository = FavoritesRepository(dao)
-        val factory = FavoritesViewModelFactory(repository)
-        favoritesViewModel = ViewModelProvider(this, factory)[FavoritesViewModel::class.java]
+        setupDependencies()
+        setupRecyclerView()
+        observeFavorites()
+    }
 
-        adapter = FavoritesAdapter { favorite ->
-            showDeleteDialog(favorite)
+    private fun setupDependencies() {
+        // Initialize dependencies
+        val database = RecipeDatabase.getInstance(requireContext())
+        val authRepository = (requireActivity().application as RecipeApplication).authRepository
+        favoriteRepository = FavoriteRepository(database.favoriteMealDao(), authRepository)
+
+        // Initialize ViewModel
+        val factory = FavoritesViewModelFactory(favoriteRepository)
+        viewModel = ViewModelProvider(this, factory)[FavoritesViewModel::class.java]
+    }
+
+    private fun setupRecyclerView() {
+        adapter = FavoritesAdapter(
+            onMealClick = { favoriteMeal ->
+                navigateToMealDetail(favoriteMeal.mealId)
+            },
+            onDeleteClick = { favoriteMeal ->
+                showDeleteDialog(favoriteMeal)
+            }
+        )
+
+        binding.favoritesRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = this@FavoritesFragment.adapter
         }
+    }
 
-        binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.favoritesRecyclerView.adapter = adapter
-
-        // Get userId from SharedPreferences
-        val userId = requireContext()
-            .getSharedPreferences("prefs", Context.MODE_PRIVATE)
-            .getString("userId", "") ?: ""
-
-        favoritesViewModel.getFavorites(userId).observe(viewLifecycleOwner) { favorites ->
+    private fun observeFavorites() {
+        viewModel.favorites.observe(viewLifecycleOwner) { favorites ->
             if (favorites.isEmpty()) {
                 binding.emptyStateText.visibility = View.VISIBLE
                 binding.favoritesRecyclerView.visibility = View.GONE
@@ -63,13 +85,20 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+    private fun navigateToMealDetail(mealId: String) {
+        // Navigate to meal detail using Navigation Component
+        val action = FavoritesFragmentDirections.actionFavoritesFragmentToMealDetailFragment(mealId)
+        findNavController().navigate(action)
+    }
 
-    private fun showDeleteDialog(favorite: mona.mohamed.recipeapp.data.FavoriteEntity) {
+    private fun showDeleteDialog(favorite: FavoriteMeal) {
         AlertDialog.Builder(requireContext())
             .setTitle("Remove Favorite")
-            .setMessage("Are you sure you want to remove this meal from your favorites?")
-            .setPositiveButton("Delete") { _, _ ->
-                favoritesViewModel.removeFavorite(favorite)
+            .setMessage("Are you sure you want to remove ${favorite.mealName} from your favorites?")
+            .setPositiveButton("Remove") { _, _ ->
+                lifecycleScope.launch {
+                    favoriteRepository.removeFromFavorites(favorite.mealId)
+                }
             }
             .setNegativeButton("Cancel", null)
             .show()

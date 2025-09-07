@@ -1,17 +1,19 @@
-package mona.mohamed.recipeapp.viewmodel
+package mona.mohamed.recipeapp.view.mealDetail
+
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import mona.mohamed.recipeapp.repository.FavoriteRepository
 
-class FavoritesViewModelFactory(
+
+class MealDetailViewModelFactory(
     private val favoriteRepository: FavoriteRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoritesViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(MealDetailViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return FavoritesViewModel(favoriteRepository) as T
+            return MealDetailViewModel(favoriteRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

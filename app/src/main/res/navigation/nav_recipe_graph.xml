@@ -20,7 +20,13 @@
         android:id="@+id/favoritesFragment"
         android:name="mona.mohamed.recipeapp.favorites.FavoritesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+
+        <action
+            android:id="@+id/action_favoritesFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"

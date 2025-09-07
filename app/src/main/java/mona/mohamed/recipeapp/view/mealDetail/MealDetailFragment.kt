@@ -13,9 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import mona.mohamed.recipeapp.R
+import mona.mohamed.recipeapp.RecipeApplication
+import mona.mohamed.recipeapp.data.local.RecipeDatabase
 import mona.mohamed.recipeapp.data.models.Meal
+import mona.mohamed.recipeapp.repository.FavoriteRepository
 import mona.mohamed.recipeapp.databinding.FragmentMealDetailBinding
 import mona.mohamed.recipeapp.view.mealDetail.MealDetailViewModel
+import mona.mohamed.recipeapp.view.mealDetail.MealDetailViewModelFactory
 
 class MealDetailFragment : Fragment() {
 
@@ -37,11 +41,19 @@ class MealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(MealDetailViewModel::class.java)
+        // Initialize dependencies
+        val database = RecipeDatabase.getInstance(requireContext())
+        val authRepository = (requireActivity().application as RecipeApplication).authRepository
+        val favoriteRepository = FavoriteRepository(database.favoriteMealDao(), authRepository)
+
+        // Initialize ViewModel with factory
+        val factory = MealDetailViewModelFactory(favoriteRepository)
+        viewModel = ViewModelProvider(this, factory).get(MealDetailViewModel::class.java)
 
         setupToolbar()
         setupWebView()
         observeData()
+        setupFavoriteButton()
 
         // Load meal details
         viewModel.loadMealDetails(args.mealId)
@@ -59,7 +71,6 @@ class MealDetailFragment : Fragment() {
             webChromeClient = WebChromeClient()
             settings.apply {
                 javaScriptEnabled = true
-                pluginState = WebSettings.PluginState.ON
                 loadWithOverviewMode = true
                 useWideViewPort = true
             }
@@ -74,6 +85,23 @@ class MealDetailFragment : Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
+
+        viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            updateFavoriteIcon(isFavorite)
+        }
+    }
+
+    private fun setupFavoriteButton() {
+        binding.fabFavorite.setOnClickListener {
+            viewModel.toggleFavorite()
+        }
+    }
+
+    private fun updateFavoriteIcon(isFavorite: Boolean) {
+        binding.fabFavorite.setImageResource(
+            if (isFavorite) R.drawable.ic_favorite
+            else R.drawable.ic_favorite_border
+        )
     }
 
     private fun displayMealDetails(meal: Meal) {
@@ -102,11 +130,6 @@ class MealDetailFragment : Fragment() {
             meal.strYoutube?.let { youtubeUrl ->
                 setupYouTubeVideo(youtubeUrl)
             }
-
-            // Set up favorite button
-            fabFavorite.setOnClickListener {
-                // TODO: Implement favorite functionality
-            }
         }
     }
 
@@ -126,13 +149,11 @@ class MealDetailFragment : Fragment() {
     }
 
     private fun setupYouTubeVideo(youtubeUrl: String) {
-        // Extract video ID from YouTube URL
         val videoId = extractYouTubeVideoId(youtubeUrl)
 
         if (videoId != null) {
             binding.cardVideo.visibility = View.VISIBLE
 
-            // Create embedded YouTube player HTML
             val html = """
                 <html>
                 <body style="margin:0;padding:0;">
@@ -165,7 +186,6 @@ class MealDetailFragment : Fragment() {
                 return matchResult.groupValues[1]
             }
         }
-
         return null
     }
 
